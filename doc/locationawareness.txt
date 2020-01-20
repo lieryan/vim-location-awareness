@@ -1,0 +1,63 @@
+*locationawareness.txt*  Plugin for displaying context in statusline
+
+
+Author:            Lie Ryan <https://github.com/lieryan/>
+License:           MIT
+Plugin Homepage:   <https://github.com/lieryan/vim-location-awareness>
+
+
+===============================================================================
+INTRODUCTION                                                *locationawareness*
+
+This plugin provides a function for formatting a short text that describes
+where you are in a code, such as function or class name where the cursor is
+located. This context line usually would be displayed in the statusline.
+
+
+===============================================================================
+INSTALLATION                                   *locationawareness-installation*
+
+At the minimum, call the locationawareness#LocationAwareness() method in your
+statusline where you want it to appear:
+>
+    set statusline+=%{locationawareness#LocationAwareness(0)}
+<
+Refer to 'statusline' on how to configure the statusline.
+
+
+===============================================================================
+RECOMMENDED CONFIGURATION                     *locationawareness-configuration*
+
+
+Always show statusline even with just one file:
+>
+    set laststatus=2
+<
+Vim's standard statusline plus vim-location-awareness:
+>
+    set statusline=%<%f:${locationawareness#LocationAwareness(0)}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+>
+Quickly switch between status line format:
+>
+    nnoremap <Leader>la :call locationawareness#toggle_format()<CR>
+<
+
+===============================================================================
+FORMATTING                                        *g:location_awareness_format*
+
+Formats is determined by the value of |g:location_awareness_format|:
+>
+    let g:location_awareness_format = 0    " ClassName.method
+    let g:location_awareness_format = 1    " ClassName.method(arg1, arg2=blah)
+    let g:location_awareness_format = 2    " path.to.file.ClassName.method(arg1, arg2=blah)
+
+Format 0 is useful for use with `:set statusline+=%f:${locationawareness#LocationAwareness(0)}`
+which should generate a pytest-compatible function name.
+
+Format 1 is useful for quick peek of the arguments of the current function,
+which can be useful when working in long functions.
+
+Format 3 is useful for use where dotted name to a python class/function is
+needed, for example, when specifying test name in the command line for
+`unittest`, when patching using `unittest.mock.patch()`, Django settings that
+required dotted name, etc.
