@@ -1,3 +1,5 @@
+let g:location_awareness_timeout = 0.080
+
 function! s:PythonContext()
   let classlnum = searchpos('^class', 'bnW', 0, 40)[0]
   let classname = substitute(getline(classlnum), '^\s*class\s\+\([^(:]*\).*', '\1', '')
@@ -9,7 +11,7 @@ function! s:PythonContext()
     let lnum = deflnum
 
     while classlnum < lnum
-      if reltimefloat(reltime(starttime)) > 0.040
+      if reltimefloat(reltime(starttime)) > g:location_awareness_timeout
         return classname . '.' . defname . " ! LocationAwareness() timed out"
       endif
     if strlen(substitute(getline(lnum), '\s', '', 'g')) > 0 && indent(lnum) <= indent(classlnum) && synIDattr(synID(lnum, 1, 0), 'name') != 'pythonDocstring'
