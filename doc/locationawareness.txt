@@ -13,6 +13,8 @@ This plugin provides a function for formatting a short text that describes
 where you are in a code, such as function or class name where the cursor is
 located. This context line usually would be displayed in the statusline.
 
+Currently, the list of supported language is just Python, other languages may
+be added in the future.
 
 ===============================================================================
 INSTALLATION                                   *locationawareness-installation*
