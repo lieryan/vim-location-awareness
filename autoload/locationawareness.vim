@@ -31,18 +31,23 @@ function! s:PythonContext()
 endfunction
 
 function! s:PythonFormat(line)
-  if g:location_awareness_format == 2
+  let line = a:line
+  if g:location_awareness_format == 0
+    let line = substitute(line, '\.', '::', '')
+    let line = substitute(line, '(.*', '', '')
+    let filepath = ""
+  elseif g:location_awareness_format == 2
     let filepath = expand('%:r')
     let filepath = substitute(filepath, '/', '.', 'g')
   else
     let filepath = ""
   endif
-  if len(filepath) > 0 && len(a:line) > 0
+  if len(filepath) > 0 && len(line) > 0
     let sep = g:location_awareness_format == 2 ? '.' : ':'
   else
     let sep = ''
   endif
-  return filepath . sep . a:line
+  return filepath . sep . line
 endfunction
 
 

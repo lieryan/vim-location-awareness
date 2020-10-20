@@ -35,7 +35,7 @@ Always show statusline even with just one file:
 <
 Vim's standard statusline plus vim-location-awareness:
 >
-    set statusline=%<%f:${locationawareness#LocationAwareness(0)}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+    set statusline=%<%f::${locationawareness#LocationAwareness(0)}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 >
 Quickly switch between status line format:
 >
@@ -47,11 +47,11 @@ FORMATTING                                        *g:location_awareness_format*
 
 Formats is determined by the value of |g:location_awareness_format|:
 >
-    let g:location_awareness_format = 0    " ClassName.method
+    let g:location_awareness_format = 0    " ClassName::method
     let g:location_awareness_format = 1    " ClassName.method(arg1, arg2=blah)
     let g:location_awareness_format = 2    " path.to.file.ClassName.method(arg1, arg2=blah)
 
-Format 0 is useful for use with `:set statusline+=%f:${locationawareness#LocationAwareness(0)}`
+Format 0 is useful for use with `:set statusline+=%f::${locationawareness#LocationAwareness(0)}`
 which should generate a pytest-compatible function name.
 
 Format 1 is useful for quick peek of the arguments of the current function,
