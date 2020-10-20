@@ -1,12 +1,14 @@
 let g:location_awareness_timeout = 0.080
 
 function! s:PythonContext()
-  let classlnum = searchpos('^class', 'bnW', 0, 40)[0]
+  let starttime = reltime()
+
+  let timeout_ms = float2nr(g:location_awareness_timeout * 1000) / 2
+  let classlnum = searchpos('^class', 'bnW', 0, timeout_ms)[0]
   let classname = substitute(getline(classlnum), '^\s*class\s\+\([^(:]*\).*', '\1', '')
-  let deflnum = searchpos('^\s*def\s', 'bnW', classlnum, 40)[0]
+  let deflnum = searchpos('^\s*def\s', 'bnW', classlnum, timeout_ms)[0]
   let defname = substitute(getline(deflnum), '\s*def\s\+\([^:]*\).*', '\1', '')
 
-  let starttime = reltime()
   if classlnum && deflnum && classlnum < deflnum
     let lnum = deflnum
 
