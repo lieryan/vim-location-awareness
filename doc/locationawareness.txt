@@ -63,3 +63,14 @@ Format 3 is useful for use where dotted name to a python class/function is
 needed, for example, when specifying test name in the command line for
 `unittest`, when patching using `unittest.mock.patch()`, Django settings that
 required dotted name, etc.
+
+===============================================================================
+TIMEOUT                                          *g:location_awareness_timeout*
+
+You can override the display timeout:
+>
+    let g:location_awareness_timeout = 0.080
+
+You normally won't have to change this value, the default is set such that you
+will have to have an impractically big class/function (in the order of tens of
+thousands of lines) or a really slow Vim to ever encounter a timeout.
