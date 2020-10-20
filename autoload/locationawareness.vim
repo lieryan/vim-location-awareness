@@ -14,9 +14,9 @@ function! s:PythonContext()
       if reltimefloat(reltime(starttime)) > g:location_awareness_timeout
         return classname . '.' . defname . " ! LocationAwareness() timed out"
       endif
-    if strlen(substitute(getline(lnum), '\s', '', 'g')) > 0 && indent(lnum) <= indent(classlnum) && synIDattr(synID(lnum, 1, 0), 'name') != 'pythonDocstring'
-        return defname
-    endif
+      if strlen(substitute(getline(lnum), '\s', '', 'g')) > 0 && indent(lnum) <= indent(classlnum) && synIDattr(synID(lnum, 1, 0), 'name') != 'pythonDocstring'
+          return defname
+      endif
       let lnum -= 1
     endwhile
 
